@@ -1,4 +1,4 @@
-import dbConnect from "../../../util/mongo";
+import dbConnect from "../../util/mongo.js";
 import Product from "../../models/Product";
 
 
