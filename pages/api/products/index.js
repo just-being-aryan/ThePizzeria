@@ -1,14 +1,14 @@
 import dbConnect from "@/util/mongo";
 import Product from "@/models/Product";
 
-
-
 export default async function handler(req, res) {
   const { method, cookies } = req;
 
-  const token = cookies.token
+  // ✅ Safe token access (prevents undefined crash)
+  const token = cookies?.token || "";
 
-  dbConnect();
+  // ✅ Await the DB connection
+  await dbConnect();
 
   if (method === "GET") {
     try {
@@ -20,8 +20,9 @@ export default async function handler(req, res) {
   }
 
   if (method === "POST") {
-    if(!token || token !== process.env.TOKEN){
-      return res.status(401).json("Not authenticated!")
+    // ✅ Token authentication check
+    if (!token || token !== process.env.TOKEN) {
+      return res.status(401).json("Not authenticated!");
     }
     try {
       const product = await Product.create(req.body);
