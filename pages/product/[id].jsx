@@ -106,7 +106,8 @@ const Product = ({ pizza }) => {
 //   };
 // };
 
-// export default Product;
+
+
 
 export const getServerSideProps = async ({ params, req }) => {
   const protocol = req.headers.host.includes("localhost") ? "http" : "https";
@@ -120,3 +121,5 @@ export const getServerSideProps = async ({ params, req }) => {
     },
   };
 };
+
+export default Product;
