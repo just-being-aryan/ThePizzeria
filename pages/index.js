@@ -27,18 +27,44 @@ export default function Home({ pizzaList, admin }) {
 }
 
 
+// export const getServerSideProps = async (ctx) => {
+//   const myCookie = ctx.req?.cookies || "";``
+//   let admin = true;
+
+//   if (myCookie.token === process.env.TOKEN) {
+//     admin = true;
+//   }
+
+//    const res = await axios.get("http://localhost:3000/api/products");
+
+
+
+//   return {
+//     props: {
+//       pizzaList: res.data,
+//       admin,
+//     },
+//   };
+// };
+
+import dbConnect from "@/util/mongo";
+import Product from "@/models/Product";
+
 export const getServerSideProps = async (ctx) => {
-  const myCookie = ctx.req?.cookies || "";
-  let admin = true;
+  const { req } = ctx;
+  const myCookie = req.cookies || {};
+  let admin = false;
 
   if (myCookie.token === process.env.TOKEN) {
     admin = true;
   }
 
-  const res = await axios.get("http://localhost:3000/api/products");
+  await dbConnect(); // ensure DB is ready
+  const products = await Product.find(); // get products directly
+
   return {
     props: {
-      pizzaList: res.data,
+      pizzaList: JSON.parse(JSON.stringify(products)), // avoid serialization errors
       admin,
     },
   };

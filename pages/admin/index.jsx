@@ -21,13 +21,16 @@ const Index = ({ orders, products }) => {
   };
 
   const handleStatus = async (id) => {
+    console.log("Updating status for order ID:", id); // Debugging line
     const item = orderList.filter((order) => order._id === id)[0];
     const currentStatus = item.status;
-
+    console.log("Current status:", currentStatus); // Debugging line
+  
     try {
       const res = await axios.put("http://localhost:3000/api/orders/" + id, {
         status: currentStatus + 1,
       });
+      console.log("Updated order:", res.data); // Debugging line
       setOrderList([
         res.data,
         ...orderList.filter((order) => order._id !== id),
@@ -56,12 +59,12 @@ const Index = ({ orders, products }) => {
               <tr className={styles.trTitle}>
                 <td>
                   <Image
-                    src={product.img}
-                    width={50}
-                    height={50}
-                    objectFit="cover"
-                    alt=""
-                  />
+                  src={product.img}
+                  width={50}
+                  height={50}
+                  style={{ objectFit: "cover" }}
+                  alt="pizza"
+                />
                 </td>
                 <td>{product._id.slice(0, 5)}...</td>
                 <td>{product.title}</td>
@@ -100,7 +103,7 @@ const Index = ({ orders, products }) => {
                 <td>{order.customer}</td>
                 <td>${order.total}</td>
                 <td>
-                  {order.method === 0 ? (<span>cash</span>) : (<span>paid</span>)}
+                  {order.method === 0 ? <span>cash</span> : <span>paid</span>}
                 </td>
                 <td>{status[order.status]}</td>
                 <td>
