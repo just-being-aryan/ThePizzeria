@@ -2,7 +2,7 @@ import { Button, TextField } from "@mui/material";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import EmailIcon from "@mui/icons-material/Email";
-import styles from "../styles/Contact.module.css"
+import styles from "../styles/Contact.module.css";
 
 const Contact = () => {
   return (
@@ -12,26 +12,26 @@ const Contact = () => {
           <h1 className={styles.container2_h1}>Contact Us</h1>
           <p className={styles.container2_p}>
             We value your feedback and inquiries. If you have any questions,
-            concerns, or feedback, please don't hesitate to contact us. Our
-            dedicated team is ready to assist you and provide the information
-            you need. Whether it's through phone, email, live chat, social
-            media, or visiting our office, we're here to ensure your experience
-            with us is exceptional. Your satisfaction is important to us, and we
-            look forward to hearing from you
+            concerns, or feedback, please don&rsquo;t hesitate to contact us.
+            Our dedicated team is ready to assist you and provide the
+            information you need. Whether it&rsquo;s through phone, email, live
+            chat, social media, or visiting our office, we&rsquo;re here to
+            ensure your experience with us is exceptional. Your satisfaction is
+            important to us, and we look forward to hearing from you.
           </p>
         </div>
         <div className={styles.contactImg}>
           <img
             src="https://unblast.com/wp-content/uploads/2020/09/Contact-Us-Vector-Illustration-Part-02-1.jpg"
             alt=""
-            height = "500"
-            width = "600"
+            height="500"
+            width="600"
           />
         </div>
       </div>
       <div className={styles.container}>
         <div className={styles.contactDetails}>
-          <h2 classname = {styles.container_h2}>
+          <h2 className={styles.container_h2}>
             Fill up the form and our team will get back to <br /> you within 24
             hours
           </h2>
@@ -47,8 +47,8 @@ const Contact = () => {
             </p>
           </div>
         </div>
-        <form className = {styles.contactformForm} action="">
-          <div className={styles.contactformFormdiv} >
+        <form className={styles.contactformForm} action="">
+          <div className={styles.contactformFormdiv}>
             <TextField
               id="standard-basic"
               label="First Name"
@@ -62,7 +62,7 @@ const Contact = () => {
               required
             />
           </div>
-          <div className={styles.contactformFormdiv} >
+          <div className={styles.contactformFormdiv}>
             <TextField
               id="standard-basic"
               label="Email"
@@ -78,7 +78,7 @@ const Contact = () => {
               required
             />
           </div>
-          <div className={styles.contactformFormdiv} >
+          <div className={styles.contactformFormdiv}>
             <TextField
               id="standard-basic"
               label="Message"
