@@ -95,15 +95,28 @@ const Product = ({ pizza }) => {
   );
 };
 
-export const getServerSideProps = async ({ params }) => {
-  const res = await axios.get(
-    `http://localhost:3000/api/products/${params.id}`
-  );
+// export const getServerSideProps = async ({ params }) => {
+//   const res = await axios.get(
+//     `http://localhost:3000/api/products/${params.id}`
+//   );
+//   return {
+//     props: {
+//       pizza: res.data,
+//     },
+//   };
+// };
+
+// export default Product;
+
+export const getServerSideProps = async ({ params, req }) => {
+  const protocol = req.headers.host.includes("localhost") ? "http" : "https";
+  const baseUrl = `${protocol}://${req.headers.host}`;
+
+  const res = await axios.get(`${baseUrl}/api/products/${params.id}`);
+
   return {
     props: {
       pizza: res.data,
     },
   };
 };
-
-export default Product;
