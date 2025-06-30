@@ -206,3 +206,5 @@ export const getServerSideProps = async ({ req }) => {
     },
   };
 };
+
+export default Index
