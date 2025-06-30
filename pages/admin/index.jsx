@@ -151,8 +151,37 @@ const Index = ({ orders, products }) => {
   );
 };
 
-export const getServerSideProps = async (ctx) => {
-  const myCookie = ctx.req?.cookies || "";
+// export const getServerSideProps = async (ctx) => {
+//   const myCookie = ctx.req?.cookies || "";
+
+//   if (myCookie.token !== process.env.TOKEN) {
+//     return {
+//       redirect: {
+//         destination: "/admin/login",
+//         permanent: false,
+//       },
+//     };
+//   }
+
+//   // const productRes = await axios.get("http://localhost:3000/api/products");
+//    const protocol = req.headers.host.includes("localhost") ? "http" : "https";
+//    const baseUrl = `${protocol}://${req.headers.host}`;
+
+//   const productRes = await axios.get(`${baseUrl}/api/products`);
+//   const orderRes = await axios.get(`${baseUrl}/api/orders`);
+
+//   // const orderRes = await axios.get("http://localhost:3000/api/orders");
+
+//   return {
+//     props: {
+//       orders: orderRes.data,
+//       products: productRes.data,
+//     },
+//   };
+// };
+
+export const getServerSideProps = async ({ req }) => {
+  const myCookie = req.cookies || {};
 
   if (myCookie.token !== process.env.TOKEN) {
     return {
@@ -163,14 +192,11 @@ export const getServerSideProps = async (ctx) => {
     };
   }
 
-  // const productRes = await axios.get("http://localhost:3000/api/products");
-   const protocol = req.headers.host.includes("localhost") ? "http" : "https";
-   const baseUrl = `${protocol}://${req.headers.host}`;
+  const protocol = req.headers.host.includes("localhost") ? "http" : "https";
+  const baseUrl = `${protocol}://${req.headers.host}`;
 
   const productRes = await axios.get(`${baseUrl}/api/products`);
   const orderRes = await axios.get(`${baseUrl}/api/orders`);
-
-  // const orderRes = await axios.get("http://localhost:3000/api/orders");
 
   return {
     props: {

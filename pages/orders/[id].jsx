@@ -114,7 +114,7 @@ const Order = ({ order }) => {
   );
 };
 
-export const getServerSideProps = async ({ params }) => {
+export const getServerSideProps = async ({ params,req }) => {
   const protocol = req.headers.host.includes("localhost") ? "http" : "https";
   const baseUrl = `${protocol}://${req.headers.host}`;
 
