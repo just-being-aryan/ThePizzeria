@@ -180,10 +180,11 @@ const Index = ({ orders, products }) => {
 //   };
 // };
 
-export const getServerSideProps = async ({ req }) => {
-  const myCookie = req.cookies || {};
 
-  if (myCookie.token !== process.env.TOKEN) {
+export const getServerSideProps = async ({ req }) => {
+  const { token } = cookie.parse(req.headers.cookie || "");
+
+  if (token !== process.env.TOKEN) {
     return {
       redirect: {
         destination: "/admin/login",
@@ -205,5 +206,3 @@ export const getServerSideProps = async ({ req }) => {
     },
   };
 };
-
-export default Index;
