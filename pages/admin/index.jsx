@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import styles from "../../styles/Admin.module.css";
 import { getBaseUrl } from "@/util/getBaseUrl";
+import cookie from 'cookie'
 
 const Index = ({ orders, products }) => {
   const [pizzaList, setPizzaList] = useState(products);
@@ -180,7 +181,6 @@ const Index = ({ orders, products }) => {
 //   };
 // };
 
-
 export const getServerSideProps = async ({ req }) => {
   const { token } = cookie.parse(req.headers.cookie || "");
 
@@ -193,18 +193,24 @@ export const getServerSideProps = async ({ req }) => {
     };
   }
 
-  const protocol = req.headers.host.includes("localhost") ? "http" : "https";
-  const baseUrl = `${protocol}://${req.headers.host}`;
+  try {
+    const protocol = req.headers.host.includes("localhost") ? "http" : "https";
+    const baseUrl = `${protocol}://${req.headers.host}`;
 
-  const productRes = await axios.get(`${baseUrl}/api/products`);
-  const orderRes = await axios.get(`${baseUrl}/api/orders`);
+    const [productRes, orderRes] = await Promise.all([
+      axios.get(`${baseUrl}/api/products`),
+      axios.get(`${baseUrl}/api/orders`)
+    ]);
 
-  return {
-    props: {
-      orders: orderRes.data,
-      products: productRes.data,
-    },
-  };
+    return {
+      props: {
+        orders: orderRes.data,
+        products: productRes.data,
+      },
+    };
+  } catch (err) {
+    console.error("Error fetching admin data:", err);
+    return { notFound: true };
+  }
 };
-
 export default Index
