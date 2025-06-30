@@ -2,7 +2,7 @@ Live Link -  https://the-pizzeria-phi.vercel.app/
 
 
 
-A MERN Stack Application made by Aryan
+A Full Stack Application made by Aryan
 - ThePizzeria
   
 ![Screenshot 2025-06-30 140124](https://github.com/user-attachments/assets/a73b419e-3c5a-4379-af3c-3a9ca7c196b8)
