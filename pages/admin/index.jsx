@@ -132,8 +132,14 @@ export const getServerSideProps = async (ctx) => {
     };
   }
 
-  const productRes = await axios.get("http://localhost:3000/api/products");
-  const orderRes = await axios.get("http://localhost:3000/api/orders");
+  // const productRes = await axios.get("http://localhost:3000/api/products");
+   const protocol = req.headers.host.includes("localhost") ? "http" : "https";
+   const baseUrl = `${protocol}://${req.headers.host}`;
+
+  const productRes = await axios.get(`${baseUrl}/api/products`);
+  const orderRes = await axios.get(`${baseUrl}/api/orders`);
+
+  // const orderRes = await axios.get("http://localhost:3000/api/orders");
 
   return {
     props: {
