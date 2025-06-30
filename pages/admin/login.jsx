@@ -23,6 +23,8 @@ const Login = () => {
     await axios.post(`${baseUrl}/api/login`, {
         username,
         password,
+      },{
+        withCredentials : true
       });
       router.push("/admin");
     } catch (err) {
