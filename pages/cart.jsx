@@ -11,6 +11,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { reset } from "../redux/cartSlice";
 import OrderDetail from "../components/OrderDetail";
+import { getBaseUrl } from "@/util/getBaseUrl";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
